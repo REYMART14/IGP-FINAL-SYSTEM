@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JOB ORDER SYSTEM</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" type="text/css" href="style1.css">
+    <script src="table2excel.js"></script>
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    </head>
+</head>
+<for>
+
+    <div class="main1">
+    <form class="invoiceForm">
+    <div class="navbar">
+            <div class="icon">
+            <img src="images/IGO1.png" class="img" width=1059px height="214px" >
+            <button class="btnn3"><a href="#">PENDING JOB ORDER</a></button>
+            <button class="btnn4"><a href="#">TOTAL JOB ORDER</a></button>
+            <button class="btnn5"><a href="#">DATE</a></button>
+            <div class="form2" >
+
+            <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>JOB ORDER</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+                <img src="images/search.png" alt="">
+            </div>
+            <div class="export__file">
+                <label for="export-file" class="export__file-btn" title="Export File"></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                    <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
+                </div>
+            </div>
+        </section>
+        <main class="table1" id="customers_table1">
+        <section class="table__body">
+           
+            <table class="table table-bordered" id="table1">
+            <thead class="thead-dark">
+                <thead>
+                    <tr>
+                       <th > DATE <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> CUSTOMER NAME <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> DESCRIPTION <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>TOTAL PURCHASE  <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>JOB ORDER STATUS <span class="icon-arrow">&UpArrow;</span></th>
+                        <th  scope="col"colspan=2> <center>Actions<span class="icon-arrow">&UpArrow;</span></th>
+
+                    
+                    
+                    </tr>
+                </thead>
+                <tbody id="invoiceItems">
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $password ="";
+                $database ="igojoberder";
+                $connection =new mysqli($servername, $username, $password, $database);
+
+                if($connection->connect_error){
+                    die("Connection failed: " . $connection->connect_error);   
+                }
+
+                   $sql = "SELECT * FROM printingjoborderform";
+                   $result = $connection->query($sql);
+
+                   if(!$result){
+                    die("Invalid queery: " . $connection->error);
+                   }
+
+                   while($row = $result->fetch_assoc()){
+                    echo "
+                    
+            
+                    <tr>
+                       
+                    <td>$row[Date]</td>
+                      <td>$row[Customer_Name]</td>
+               
+                    <td>$row[Description]</td>
+                    
+                    <td>$row[Total]</td>
+                    
+                    <td>$row[JO_status]</td>
+                   
+
+                    </tr>
+
+                    ";
+                   }
+                
+                ?>
+ 
+                </tbody>
+            </table>
+        </section>
+    </main>
+    </main>
+    <script src="script.js"></script>
+    <script src="addnew1.js"></script>
+<script>
+    document.getElementById('toEXCEL').addEventListener('click', function(){
+var table2excel = new Table2Excel();
+table2excel.export(document.querySelectorAll("#table1"));
+    });
+</script>
+        </div>    </div> 
+    </div> </div>
+
+         
+                <div class="form1" >
+               
+                <img src="images/IGP1.png" class="img" width="250px" height="110px" >
+                <button class="btnn2"><a href="#">New Job Order</a></button>
+                 <button class="btnn1"><a href="#">Generate Report</a></button>
+
+               
+                <button class="btnn"><a href="http://localhost/IGO/index.php">Logout</a></button>
+
+               
+
+                
+                    </div>
+                </div>
+        </div>
+</form>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+
+</body>
+</html>
